@@ -1,0 +1,43 @@
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Random;
+
+class Simulator {
+ public Team team1;
+ public Team team2;
+ public Simulator(String team1,String team2) {
+	 this.team1=new Team(team1,0);
+	 this.team2=new Team(team2,0);
+ }	
+ public void halfTimeBreak(Instant current) {
+	 while(Duration.between(current,Instant.now()).toMillis()!=900000) {
+		 continue;
+	 }
+	 return;
+ }
+ public void matchSimulation(Instant currentTime) {
+	 Random random = new Random();
+	while(Duration.between(currentTime,Instant.now()).toMillis()!=2700000) {
+		team1.teamScore+=random.nextInt(1);
+		team2.teamScore+=random.nextInt(1);
+	}
+	currentTime=Instant.now();
+	halfTimeBreak(currentTime);
+	currentTime=Instant.now();
+	while(Duration.between(currentTime,Instant.now()).toMillis()!=2700000) {
+		team1.teamScore+=random.nextInt(1);
+		team2.teamScore+=random.nextInt(1);
+	} 
+	return;
+ }
+ public Team matchWinner() throws Exception {
+	 matchSimulation(Instant.now());
+	 if(team1.teamScore>team2.teamScore) {
+		 return team1;
+	 }else if(team2.teamScore>team1.teamScore) {
+		 return team2;
+	 }else {
+		 throw new Exception("This match has ended in a draw. There is no winner as both teams have the same score");
+	 }
+ }
+}
