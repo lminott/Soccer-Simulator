@@ -1,0 +1,8 @@
+public class Team {
+   String team;
+   int teamScore;
+   public Team(String team,int teamScore) {
+	   this.team=team;
+	   this.teamScore=teamScore;
+   }
+}
